@@ -1,0 +1,15 @@
+FROM python:3.9-buster
+WORKDIR /tmp
+COPY ./docker/python/requirements.txt .
+COPY ./docker/python/import.pth .
+
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y  \
+        ca-certificates \
+        libgl1-mesa-dev \
+    && pip install --upgrade pip --no-cache-dir \
+    && pip install -r requirements.txt --no-cache-dir \
+    && rm -r /tmp/requirements.txt \
+    && mv -f import.pth $(python -c 'import sys; print(sys.path)' | grep -o "[^']*site-packages")/import.pth
+
+WORKDIR /app/packages

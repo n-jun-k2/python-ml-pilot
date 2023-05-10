@@ -1,0 +1,1 @@
+FROM airflow:2.2.3

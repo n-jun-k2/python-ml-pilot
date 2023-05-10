@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  ml:
+    build:
+      context: .
+      dockerfile: ./docker/python/dockerfile
+    volumes:
+      - ./projects:/app/packages
+      - ./models:/app/models
+      - ./data:/app/data
+    tty: true
+    env_file:
+      - .env

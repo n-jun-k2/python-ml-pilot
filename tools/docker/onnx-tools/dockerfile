@@ -1,0 +1,13 @@
+FROM python:3.9-buster
+WORKDIR /tmp/src
+COPY ./docker/onnx-tools/requirements.txt .
+
+RUN pip install -r requirements.txt --no-cache-dir \
+    && rm -rf /root/.cache/pip
+
+WORKDIR /tmp
+
+ENV PYTHONDONTWRITEBYTECODE 1
+
+CMD [ "-i",  "/tmp/input.onnx", "-o", "/tmp/output" ]
+ENTRYPOINT [ "onnx-tf", "convert" ]

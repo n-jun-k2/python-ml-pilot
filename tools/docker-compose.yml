@@ -1,0 +1,14 @@
+version: '3.9'
+services:
+  pip-tools:
+    build:
+      context: .
+      dockerfile: ./docker/pip-tools/dockerfile
+    volumes:
+      - ./pip-tools:/tmp
+  onnx-tools:
+    build:
+      context: .
+      dockerfile: ./docker/onnx-tools/dockerfile
+    volumes:
+      - ./onnx-tools:/tmp

@@ -1,0 +1,8 @@
+FROM python:3.9-buster
+WORKDIR /tmp
+
+RUN pip install pip-tools --no-cache-dir \
+    && rm -rf /root/.cache/pip
+
+CMD ["requirements.in"]
+ENTRYPOINT [ "pip-compile" ]
